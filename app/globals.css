@@ -1,26 +1,87 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
+/*
+ * Brand tokens — change colours, fonts and type sizes here only.
+ * Royal Blue luxury / hi-tech palette.
+ */
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  /* Colours */
+  --color-ink: #050b1f; /* deepest navy, page footer */
+  --color-navy: #0a1a4a; /* dark section background */
+  --color-navy-2: #12286b; /* gradient partner */
+  --color-royal: #2f5ae0; /* Royal Blue — buttons, accents */
+  --color-royal-bright: #5b82ff; /* highlights on dark */
+  --color-ice: #c9d6ff; /* soft text on dark */
+  --color-mist: #eef2fb; /* light section background */
+  --color-steel: #5b6683; /* muted body text on light */
+  --color-line: #22d36b; /* LINE green */
+  --color-foreground: #0d1530;
+  --color-background: #ffffff;
+
+  /* Fonts (set in layout.tsx via next/font) */
+  --font-sans: var(--font-plex-thai), system-ui, sans-serif;
+  --font-serif: var(--font-serif-thai), Georgia, serif;
+  --font-mono: var(--font-plex-mono), ui-monospace, monospace;
+
+  /* Type scale (mobile first, grows on large screens) */
+  --text-eyebrow: 0.75rem;
+  --text-eyebrow--letter-spacing: 0.22em;
+  --text-body: 1rem;
+  --text-body--line-height: 1.75;
+  --text-lead: clamp(1.05rem, 0.98rem + 0.4vw, 1.25rem);
+  --text-lead--line-height: 1.75;
+  --text-h3: clamp(1.15rem, 1.08rem + 0.35vw, 1.35rem);
+  --text-h3--line-height: 1.5;
+  --text-h2: clamp(1.75rem, 1.4rem + 1.6vw, 2.75rem);
+  --text-h2--line-height: 1.35;
+  --text-display: clamp(2.1rem, 1.5rem + 3vw, 4.25rem);
+  --text-display--line-height: 1.3;
+  --text-stat: clamp(1.15rem, 0.7rem + 2vw, 1.9rem);
+  --text-stat--line-height: 1.1;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 5rem;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--color-background);
+  color: var(--color-foreground);
+  font-family: var(--font-sans);
+  font-size: var(--text-body);
+  line-height: 1.75;
+}
+
+/* Reusable pieces */
+.bg-royal-gradient {
+  background: linear-gradient(160deg, var(--color-navy-2) 0%, var(--color-navy) 55%, var(--color-ink) 100%);
+}
+
+@utility glass {
+  background: linear-gradient(160deg, rgb(47 90 224 / 0.28), rgb(10 26 74 / 0.55));
+  border: 1px solid rgb(201 214 255 / 0.18);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+}
+
+.grid-lines {
+  background-image:
+    linear-gradient(rgb(201 214 255 / 0.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgb(201 214 255 / 0.06) 1px, transparent 1px);
+  background-size: 48px 48px;
+}
+
+details > summary::-webkit-details-marker {
+  display: none;
+}
+
+details[open] .faq-icon {
+  transform: rotate(45deg);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
 }
